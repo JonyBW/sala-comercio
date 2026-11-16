@@ -83,6 +83,7 @@ if (!$partida->estaJugando()) {
 $codigo = $pais->getCodigo();
 $decision = $partida->getDecision($codigo);
 $otros = array_filter($partida->getPaises(), fn($p) => $p->getCodigo() !== $codigo);
+$evento = $partida->getEventoPendiente();
 
 // ---- Ya ha confirmado: pantalla de espera ----
 if ($decision->isConfirmada()) {
@@ -93,6 +94,17 @@ if ($decision->isConfirmada()) {
         <h1>✔ Decisión enviada</h1>
         <p>Esperando a que el resto de países confirme o a que el profesor cierre el año <?= $partida->getAnio() ?>…</p>
 
+        <?php if ($evento): ?>
+            <div class="aviso malo evento-elegido">
+                <span class="icono-grande"><?= $evento->getIcono() ?></span>
+                <div>
+                    <strong>⚠️ Este año: <?= Vista::e($evento->getNombre()) ?></strong>
+                    <p><?= Vista::e($evento->getDescripcion()) ?></p>
+                    <p class="nota">Si queréis reaccionar, pulsad «Cambiar mi decisión».</p>
+                </div>
+            </div>
+        <?php endif; ?>
+        
         <div class="resumen-decision">
             <h3>Tus aranceles</h3>
             <ul>
@@ -146,6 +158,17 @@ Vista::cabecera($pais->getNombre() . ' · Año ' . $partida->getAnio());
 <main class="contenido estrecho">
     <?php if (($_GET['aviso'] ?? '') === 'cerrado'): ?>
         <p class="aviso malo">El profesor cerró el año antes de que confirmarais. Mirad lo que ha pasado y decidid para este año.</p>
+    <?php endif; ?>
+
+    <?php if ($evento): ?>
+        <div class="aviso malo evento-elegido">
+            <span class="icono-grande"><?= $evento->getIcono() ?></span>
+            <div>
+                <strong>⚠️ Este año: <?= Vista::e($evento->getNombre()) ?></strong>
+                <p><?= Vista::e($evento->getDescripcion()) ?></p>
+                <p class="nota">Se aplicará al cerrar el año <?= $partida->getAnio() ?>. ¿Cambia algo vuestra decisión?</p>
+            </div>
+        </div>
     <?php endif; ?>
 
     <section class="tarjeta">
