@@ -5,7 +5,7 @@
 // =====================================================================
 
 // ---- General ----
-const PASSWORD_PROFE  = 'cambiame';          // <-- CAMBIA ESTA CONTRASEÑA
+const PASSWORD_PROFE  = 'Irakasle';          // <-- CAMBIA ESTA CONTRASEÑA
 const REFRESCO        = 3;                   // segundos entre recargas de las pantallas
 const ARCHIVO_PARTIDA = __DIR__ . '/datos/partida.json';
 define('ANIO_INICIAL', (int) date('Y'));     // la partida empieza en el año actual
