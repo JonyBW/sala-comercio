@@ -141,8 +141,8 @@ Vista::cabecera('Indicadores · Año ' . $partida->getAnio(), $confirmarFin ? 0 
     <h1>🌍 Comercio mundial</h1>
     <div class="anio">Año <strong><?= $partida->getAnio() ?></strong></div>
     <nav>
-        <a class="boton" href="mapa.php" target="_blank">🗺️ Abrir mapa</a>
-        <a class="boton" href="noticias.php" target="_blank">📰 Abrir noticias</a>
+        <a class="boton" href="mapa.php" >🗺️ Abrir mapa</a>
+        <a class="boton" href="noticias.php" >📰 Abrir noticias</a>
     </nav>
 </header>
 
@@ -158,14 +158,14 @@ Vista::cabecera('Indicadores · Año ' . $partida->getAnio(), $confirmarFin ? 0 
 
                 <?php if (!$pais->estaGenerado()): ?>
                     <p class="estado">Sin generar</p>
-                    <form method="post" target="_blank">
+                    <form method="post" >
                         <input type="hidden" name="accion" value="generar">
                         <input type="hidden" name="pais" value="<?= Vista::e($codigo) ?>">
                         <button class="boton principal">Generar país</button>
                     </form>
                 <?php else: ?>
                     <p class="estado"><?= $confirmado ? '✔ Ha confirmado' : '⏳ Decidiendo…' ?></p>
-                    <a class="boton pequeno" href="pais.php?t=<?= Vista::e($pais->getToken()) ?>" target="_blank">Abrir de nuevo</a>
+                    <a class="boton pequeno" href="pais.php?t=<?= Vista::e($pais->getToken()) ?>" >Abrir de nuevo</a>
                 <?php endif; ?>
 
                 <?= Vista::indicadores($pais) ?>
